@@ -1,0 +1,25 @@
+{
+  "name": "FRFR_Mafia42",
+  "version": "1.0.0",
+  "description": "명룹풀강 마피아42 툴 모음",
+  "main": "dist/app.js",
+  "author": "docteory07",
+  "license": "MIT",
+  "scripts": {
+    "start": "node dist/src/app.js",
+    "build": "tsc -p .",
+    "dev": "nodemon --watch \"src/**/*.ts\" --exec \"ts-node\" src/app.ts"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.14.9",
+    "@types/request": "^2.48.12",
+    "nodemon": "^3.1.4",
+    "typescript": "^5.5.3"
+  }
+}

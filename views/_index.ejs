@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mafia42 유저 정보 조회</title>
+  <style>
+    .start-button {
+      background-color: #4CAF50; /* Green */
+      border: none;
+      color: #ffffff;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+    .stop-button {
+      background-color: #f44336; /* Red */
+    }
+  </style>
+</head>
+<body>
+  <h1>Mafia42 유저 정보 조회</h1>
+  <input type="text" id="nicknameInput" placeholder="닉네임을 입력하세요">
+  <button onclick="fetchUserData()">유저 정보 조회</button>
+  <button id="startButton" class="start-button" onclick="toggleUpdating()">Start</button>
+  <div id="userInfo">
+    <p><strong>닉네임:</strong> <span id="nicknameValue"></span></p>
+    <p><strong>승리 횟수:</strong> <span id="winCountValue"></span></p>
+    <p><strong>패배 횟수:</strong> <span id="loseCountValue"></span></p>
+    <p><strong>승패 총합:</strong> <span id="totalCountValue"></span></p>
+    <p id="difference"></p>
+  </div>
+
+  <script>
+    let intervalId = null;
+    let isUpdating = false;
+    let initialTotalSum = 0;
+
+    async function fetchUserData() {
+      const nickname = document.getElementById('nicknameInput').value.trim();
+
+      try {
+        const response = await fetch(`http://localhost:8000/get/${nickname}`);
+        if (!response.ok) {
+          throw new Error('유저 정보를 가져오는 데 실패했습니다.');
+        }
+        const userData = await response.json();
+        displayUserData(userData);
+      } catch (error) {
+        console.error('Error:', error.message);
+      }
+    }
+
+    function displayUserData(userData) {
+      const { NICKNAME, win_count, lose_count } = userData;
+      document.getElementById('nicknameValue').textContent = NICKNAME;
+      document.getElementById('winCountValue').textContent = win_count;
+      document.getElementById('loseCountValue').textContent = lose_count;
+      const totalSum = win_count + lose_count;
+      document.getElementById('totalCountValue').textContent = totalSum;
+      if (!isUpdating) {
+        initialTotalSum = totalSum;
+      }
+    }
+
+    function toggleUpdating() {
+      if (!isUpdating) {
+        startUpdating();
+        document.getElementById('startButton').textContent = 'Stop';
+        document.getElementById('startButton').classList.add('stop-button');
+      } else {
+        stopUpdating();
+        document.getElementById('startButton').textContent = 'Start';
+        document.getElementById('startButton').classList.remove('stop-button');
+      }
+      isUpdating = !isUpdating;
+    }
+
+    function startUpdating() {
+      intervalId = setInterval(async () => {
+        const nickname = document.getElementById('nicknameInput').value.trim();
+        if (nickname) {
+          try {
+            const response = await fetch(`http://localhost:8000/get/${nickname}`);
+            if (!response.ok) {
+              throw new Error('유저 정보를 가져오는 데 실패했습니다.');
+            }
+            const userData = await response.json();
+            const { NICKNAME, win_count, lose_count } = userData;
+            const totalSum = win_count + lose_count;
+            document.getElementById('nicknameValue').textContent = NICKNAME
+            document.getElementById('winCountValue').textContent = win_count;
+            document.getElementById('loseCountValue').textContent = lose_count;
+            document.getElementById('totalCountValue').textContent = totalSum;
+            calculateDifference(totalSum);
+          } catch (error) {
+            console.error('Error:', error.message);
+          }
+        }
+      }, 5000); // 5초마다 업데이트
+    }
+
+    function stopUpdating() {
+      clearInterval(intervalId);
+    }
+
+    function calculateDifference(currentTotalSum) {
+      const difference = currentTotalSum - initialTotalSum;
+      document.getElementById('difference').textContent = `초기 총합과의 차이: ${difference}`;
+    }
+  </script>
+</body>
+</html>

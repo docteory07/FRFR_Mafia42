@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>맢닉 명룹풀강</title>
+    <!-- CSS Reset -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <script src="https://kit.fontawesome.com/bd07f9c121.js" crossorigin="anonymous"></script>
+    <!-- FontAwesome에서 아이콘 가져오기 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Sans+KR&display=swap"
+      rel="stylesheet">
+    <!-- FontGoogle에서 가져오기 -->
+  
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <!-- css파일 적용하기 -->
+  </head>
+  <body>
+    <header>
+      <div class="inner banselect">
+        <div class="head-container">
+          <div class="head-brand">명룹풀강 마피아42 도구 모음</div>
+          <div class="head-ps">
+            <span class="fa-stack">
+              <i class="fa-solid fa-envelope fa-stack-2x" style="color: #63E6BE;"></i>
+            <i class="fa-solid fa-circle fa-xs fa-stack-1x fa-inverse" style="color: #FFD34B; padding-top: 3px;"></i>
+          </span>깜엽기부환영</div>
+          <div class="head-theme">
+            <i class="fa-solid fa-lightbulb" id="themeCh" onclick()></i>
+          </div>
+        </div>
+      </div>
+    </header>
+    <section class="main">
+      <div class="inner main-container">
+        <div class="counter">
+          <p class="desc">처음이시라면 <a href="https://mafia42.com/#/community/lastDiscussion/lastShow/1014182" target="_blank">최후의 반론</a>에 댓글을 달아주세요.</p>
+          <input type="text" id="nameInput" placeholder="유저명을 입력해주세요"><br>
+          <div id="status" style="display: none;">
+            <p><strong><span id="NICKNAME"></span></strong></p>
+            <p><strong>획초까지</strong> 현재 <span id="counting">0</span>/31판 완료</p>
+            <p><strong><span id="cntComplete"></span></strong></p>
+            <br>
+            <p><strong>획초 중</strong> <span id="winCnt">0</span>승</p>
+            <p><strong>획초 중</strong> <span id="loseCnt">0</span>패</p>
+          </div>
+          <button onclick="toggleCounting()" class="start" id="cntButton">시작하기</button>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div class="inner">
+        <div class="copyright">ⓒ 2024. docteory07. All rights reserved.</div>
+      </div>
+    </footer>
+</body>
+<script src="/img/index.js"></script>
+<!-- js파일 적용하기 -->
+</html>
