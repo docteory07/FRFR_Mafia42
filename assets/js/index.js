@@ -3,13 +3,25 @@ let darkTheme = false;
 let lightbulb = document.querySelector('#themeCh')
 const html = document.documentElement
 
-if (!window.matchMedia("(prefers-color-scheme: dark)").matches)
-  html.classList.add('dark')
-
-lightbulb.onclick = () => {
-  html.classList.toggle('dark')
+const storedTheme = localStorage.getItem("darkTheme");
+ 
+if (storedTheme !== null) {
+    if (storedTheme === "true") {
+        document.documentElement.classList.add("dark");
+    }
+} else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    document.documentElement.classList.add("dark");
 }
 
+lightbulb.onclick = () => {
+  if (html.classList.contains("dark")) {
+    html.classList.remove("dark")
+    localStorage.setItem("darkTheme", "false")
+  } else {
+    html.classList.add("dark")
+    localStorage.setItem("darkTheme", "true")
+  }
+}
 
 /* ========= 획초 ========= */
 let cntInterval = null
@@ -40,57 +52,59 @@ const fetchUser = async () => {
     const userData = await response.json()
     receive(userData)
   } catch (error) {
-    console.error('Error:', error.message)
-    alert('최후의 반론에 댓글을 달아주세요.')
     throw error
   }
 }
 
 const toggleCounting = async () => {
-  if (!isCounting) {
-    document.getElementById('nameInput').readOnly = true
-
-    try {
-      await fetchUser()
-    } catch (error) {
-      document.getElementById('nameInput').readOnly = false
-      return
-    }
-    
-    document.getElementById('cntButton').textContent = '중지하기'
-    document.getElementById('cntButton').classList.add('stop')
-    
-    document.getElementById('status').style.display = 'block'
-    startCounting()
+  const $name = document.getElementById('nameInput')
+  if (!$name.value) {
+    alert('닉네임을 입력해주세요.')
+    return
   } else {
-    document.getElementById('nameInput').readOnly = false
-    stopCounting()
-    document.getElementById('cntButton').textContent = '획초 시작하기'
-    document.getElementById('cntButton').classList.remove('stop')
-
-    document.getElementById('status').style.display = 'none'
+    if (!isCounting) {
+      $name.readOnlwy = true
+      
+      try {
+        await fetchUser()
+      } catch (error) {
+        $name.readOnly = false
+        
+        alert('최후의 반론에 댓글을 달아주세요.')
+        return
+      }
+      
+      document.getElementById('cntButton').textContent = '중지하기'
+      document.getElementById('cntButton').classList.add('stop')
+      
+      document.getElementById('status').style.display = 'block'
+      startCounting()
+    } else {
+      $name.readOnly = false
+      stopCounting()
+      document.getElementById('cntButton').textContent = '시작하기'
+      document.getElementById('cntButton').classList.remove('stop')
+      
+      document.getElementById('status').style.display = 'none'
+    }
+    isCounting = !isCounting
   }
-  isCounting = !isCounting
 }
 
 const startCounting = () => {
   cntInterval = setInterval(async () => {
     const NICKNAME = document.getElementById('NICKNAME').textContent.trim();
     if (NICKNAME) {
-      try {
-        const response = await fetch(`/get/${NICKNAME}`);
-        if (!response.ok) {
-          throw new Error('유저 정보를 가져오는 데 실패했습니다.');
-        }
-        const userData = await response.json();
-        const { win_count, lose_count } = userData;
-        const totalSum = win_count + lose_count;
-        calcCount(totalSum, win_count, lose_count);
-      } catch (error) {
-        console.error('Error:', error.message);
+      const response = await fetch(`/get/${NICKNAME}`);
+      if (!response.ok) {
+        throw new Error('유저 정보를 가져오는 데 실패했습니다.');
       }
+      const userData = await response.json();
+      const { win_count, lose_count } = userData;
+      const totalSum = win_count + lose_count;
+      calcCount(totalSum, win_count, lose_count);
     }
-  }, 0)
+  }, 100)
 }
 
 const stopCounting = () => {

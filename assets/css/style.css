@@ -1,5 +1,5 @@
 html {
-  --lightblub-color: #240046;
+  --lightblub-color: #1f1f1f;
 
   background: #edf2fb;
   --background: #edf2fb;
@@ -12,15 +12,26 @@ html {
   --footer-color: whitesmoke;
   --footer-text-color: gray;
   --footer-top: #e8e8e8;
+
+  --link-color: #606060
 }
-/* html.dark {
-  background: #3c096c;
-  --background: #3c096c;
-  --head-color: #240046;
-  --text-color: #f1f1f1;
-  --head-text-color: #bbb;
+html.dark {
   --lightblub-color: #d7e3fc;
-} */
+
+  background: #121212;
+  --background: #121212;
+  
+  --head-color: #1f1f1f;
+  --head-text-color: #e0e0e0;
+  
+  --text-color: #bbb;
+
+  --footer-color: #1f1f1f;
+  --footer-text-color: #b0b0b0;
+  --footer-top: #2c2c2c;
+
+  --link-color: #808080
+}
 
 * {
   box-sizing: border-box;
@@ -29,6 +40,8 @@ html {
 body {
   margin: 0 auto;
   font-family: 'Noto Sans KR', sans-serif;
+  color: var(--text-color);
+  font-weight: 400;
 }
 
 .inner {
@@ -43,7 +56,7 @@ a {
 }
 a:link, a:visited, a:active, a:hover {
   text-decoration: none;
-  color: gray;
+  color: var(--link-color);
 }
 
 section {
@@ -68,20 +81,21 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  line-height: 100%;
 }
 .head-container .head-brand {
   color: var(--text-color);
   font-weight: bold;
-  font-size: 1.3rem;
+  font-size: 1rem;
 }
 .head-container .head-ps {
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-family: 'Narnum Gothic', sans-serif;
   color: var(--head-text-color);
 }
 .head-container .head-theme {
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: var(--lightblub-color)
 }
 
@@ -109,8 +123,10 @@ header {
   vertical-align: middle;
 }
 .counter .desc {
-  font-weight: bold;
   font-family: 'Narnum Gothic', sans-serif;
+}
+.counter .desc a {
+  font-weight: bold;
 }
 .counter .desc a:hover {
   cursor: pointer;
