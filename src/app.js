@@ -11,8 +11,8 @@ const port = process.env.PORT || 8000;
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
-app.set('views', path_1.default.join(__dirname, '../views'));
-app.use(express_1.default.static(path_1.default.join(__dirname, '../assets')));
+app.set('views', path_1.default.join(__dirname, 'views'));
+app.use(express_1.default.static(path_1.default.join(__dirname, '/assets')));
 app.use('/', init_1.default);
 app.use((err, req, res, next) => {
     console.error(err.stack);
