@@ -6,14 +6,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const path_1 = __importDefault(require("path"));
 const init_1 = __importDefault(require("../routes/init"));
+const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 5000;
+// CORS 미들웨어 추가
+app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.set('views', path_1.default.join(__dirname, 'views'));
 app.use(express_1.default.static(path_1.default.join(__dirname, '/assets')));
-app.use('/', init_1.default);
+app.use('/api', init_1.default);
+app.get('/', (req, res) => {
+    res.render('index');
+});
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('잘못 짰다!');

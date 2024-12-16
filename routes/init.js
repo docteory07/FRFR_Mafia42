@@ -4,10 +4,7 @@ const express_1 = require("express");
 const crawl_1 = require("../api/counter/crawl");
 const user_1 = require("../api/counter/user");
 const router = (0, express_1.Router)();
-router.get('/', (req, res) => {
-    res.render("index");
-});
-router.get('/api', (_, res) => {
+router.get('/', (_, res) => {
     res.send('명룹풀강 마피아42 획초 카운터 API');
 });
 router.get('/get/:nickname', (req, res) => {
