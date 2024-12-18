@@ -157,6 +157,8 @@ footer{
   width: 100%;
   position: fixed;
   bottom: 0;
+  left: 0;
+  z-index: 1000;
   background-color: var(--footer-color);
   color: var(--footer-text-color);
   padding: 1.3rem 0;
