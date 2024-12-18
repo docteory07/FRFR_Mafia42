@@ -18,7 +18,7 @@ const fetchUser = async () => {
   const name = document.getElementById('nameInput').value.trim()
   
   try {
-    const response = await fetch(`/get/${name}`)
+    const response = await fetch(`/api/get/${name}`)
     if (!response.ok) {
       throw new Error('유저 정보를 가져오는 데 실패했습니다.');
     }
@@ -69,7 +69,7 @@ const startCounting = () => {
   cntInterval = setInterval(async () => {
     const NICKNAME = document.getElementById('NICKNAME').textContent.trim();
     if (NICKNAME) {
-      const response = await fetch(`/get/${NICKNAME}`);
+      const response = await fetch(`/api/get/${NICKNAME}`);
       if (!response.ok) {
         throw new Error('유저 정보를 가져오는 데 실패했습니다.');
       }
