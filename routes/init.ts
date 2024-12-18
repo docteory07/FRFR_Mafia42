@@ -4,11 +4,7 @@ import { User } from '../api/counter/user'
 
 const router: Router = Router()
 
-router.get('/', (req: Request, res: Response) => {
-  res.render("index")
-})
-
-router.get('/api', (_: Request, res: Response) => {
+router.get('/', (_: Request, res: Response) => {
   res.send('명룹풀강 마피아42 획초 카운터 API')
 })
 

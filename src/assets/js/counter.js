@@ -1,29 +1,3 @@
-/* ========= 테마 =========*/
-let darkTheme = false;
-let lightbulb = document.querySelector('#themeCh')
-const html = document.documentElement
-
-const storedTheme = localStorage.getItem("darkTheme");
- 
-if (storedTheme !== null) {
-    if (storedTheme === "true") {
-        document.documentElement.classList.add("dark");
-    }
-} else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-    document.documentElement.classList.add("dark");
-}
-
-lightbulb.onclick = () => {
-  if (html.classList.contains("dark")) {
-    html.classList.remove("dark")
-    localStorage.setItem("darkTheme", "false")
-  } else {
-    html.classList.add("dark")
-    localStorage.setItem("darkTheme", "true")
-  }
-}
-
-/* ========= 획초 ========= */
 let cntInterval = null
 let isCounting = false
 let preTot = 0
@@ -42,9 +16,9 @@ const receive = (userData) => {
 
 const fetchUser = async () => {
   const name = document.getElementById('nameInput').value.trim()
-
+  
   try {
-    const response = await fetch(`/get/${name}`)
+    const response = await fetch(`/api/get/${name}`)
     if (!response.ok) {
       throw new Error('유저 정보를 가져오는 데 실패했습니다.');
     }
@@ -95,7 +69,7 @@ const startCounting = () => {
   cntInterval = setInterval(async () => {
     const NICKNAME = document.getElementById('NICKNAME').textContent.trim();
     if (NICKNAME) {
-      const response = await fetch(`/get/${NICKNAME}`);
+      const response = await fetch(`/api/get/${NICKNAME}`);
       if (!response.ok) {
         throw new Error('유저 정보를 가져오는 데 실패했습니다.');
       }
@@ -113,7 +87,7 @@ const stopCounting = () => {
 
 const calcCount = (curTot, curWin, curLose) => {
   const cntTot = curTot - preTot;
-  document.getElementById('counting').textContent = cntTot
+  document.getElementById('counting').textContent = cntTot + 1
   document.getElementById('winCnt').textContent = curWin - preWin
   document.getElementById('loseCnt').textContent = curLose - preLose
 
