@@ -92,6 +92,7 @@ const startCounting = () => {
 
 const stopCounting = () => {
   clearInterval(cntInterval)
+  tmpCnt = 0
 }
 
 const cntClc = (val) => {
