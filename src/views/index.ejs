@@ -27,11 +27,6 @@
       <div class="inner banselect">
         <div class="head-container">
           <div class="head-brand">명룹풀강 마피아42 도구 모음</div>
-          <div class="head-ps">
-            <span class="fa-stack">
-              <i class="fa-solid fa-envelope fa-stack-2x" style="color: #63E6BE;"></i>
-            <i class="fa-solid fa-circle fa-xs fa-stack-1x fa-inverse" style="color: #FFD34B; padding-top: 3px;"></i>
-          </span>깜엽기부환영</div>
           <div class="head-theme">
             <i class="fa-solid fa-lightbulb" id="themeCh" onclick()></i>
           </div>
@@ -43,7 +38,7 @@
         <div class="counter">
           <p class="desc">처음이시라면 <a href="https://mafia42.com/#/community/lastDiscussion/lastShow/1014182" target="_blank">최후의 반론</a>에 댓글을 달아주세요.</p>
           <input type="text" id="nameInput" placeholder="마피아42 닉네임" size="10"><br>
-          <div id="status" style="display: none;">
+          <div id="status">
             <p><strong><span id="NICKNAME"></span></strong></p>
             <p>현재 <span id="counting">1</span>/31판 진행중</p>
             <p><strong><span id="cntComplete"></span></strong></p>
@@ -51,7 +46,11 @@
             <p><strong>획초 중</strong> <span id="winCnt">0</span>승</p>
             <p><strong>획초 중</strong> <span id="loseCnt">0</span>패</p>
           </div>
-          <button onclick="toggleCounting()" class="start" id="cntButton">시작하기</button>
+          <div class="btn">
+            <button onclick="cntClc(-1)" class="inc cntClcButton">-1</button>
+            <button onclick="toggleCounting()" class="start" id="cntButton">시작하기</button>
+            <button onclick="cntClc(+1)" class="dec cntClcButton">+1</button>
+          </div>
         </div>
       </div>
     </section>

@@ -8,7 +8,6 @@ const port = process.env.PORT || 5000
 
 // CORS 미들웨어 추가
 app.use(cors());
-
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 

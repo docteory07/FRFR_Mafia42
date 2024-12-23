@@ -3,6 +3,11 @@ let isCounting = false
 let preTot = 0
 let preWin = 0
 let preLose = 0
+let tmpCnt = 0
+
+const _status = document.getElementById('status')
+const _cntBtn = document.getElementById('cntButton')
+const _clcButtns = document.getElementsByClassName('cntClcButton')
 
 const receive = (userData) => {
   const { NICKNAME, win_count, lose_count } = userData
@@ -48,18 +53,22 @@ const toggleCounting = async () => {
         return
       }
       
-      document.getElementById('cntButton').textContent = '중지하기'
-      document.getElementById('cntButton').classList.add('stop')
+      _cntBtn.textContent = '중지하기'
+      _cntBtn.classList.add('stop')
       
-      document.getElementById('status').style.display = 'block'
+      _status.style.display = 'block'
+      _clcButtns[0].style.display = 'inline-block'
+      _clcButtns[1].style.display = 'inline-block'
       startCounting()
     } else {
       $name.readOnly = false
       stopCounting()
-      document.getElementById('cntButton').textContent = '시작하기'
-      document.getElementById('cntButton').classList.remove('stop')
+      _cntBtn.textContent = '시작하기'
+      _cntBtn.classList.remove('stop')
       
-      document.getElementById('status').style.display = 'none'
+      _status.style.display = 'none'
+      _clcButtns[0].style.display = 'none'
+      _clcButtns[1].style.display = 'none'
     }
     isCounting = !isCounting
   }
@@ -75,14 +84,18 @@ const startCounting = () => {
       }
       const userData = await response.json();
       const { win_count, lose_count } = userData;
-      const totalSum = win_count + lose_count;
+      const totalSum = win_count + lose_count + tmpCnt;
       calcCount(totalSum, win_count, lose_count);
     }
-  }, 100)
+  }, 1000)
 }
 
 const stopCounting = () => {
   clearInterval(cntInterval)
+}
+
+const cntClc = (val) => {
+  tmpCnt += val
 }
 
 const calcCount = (curTot, curWin, curLose) => {

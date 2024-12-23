@@ -13,11 +13,15 @@ html {
   --footer-text-color: gray;
   --footer-top: #e8e8e8;
 
-  --link-color: #606060
+  --link-color: #606060;
+
+  --startBtn-color: #4CAF50;
+  --stopBtn-color: #f44336;
+  --clcBtn-color: #1e90ff;
 }
 html.dark {
   --lightblub-color: #d7e3fc;
-
+  
   background: #121212;
   --background: #121212;
   
@@ -25,12 +29,16 @@ html.dark {
   --head-text-color: #e0e0e0;
   
   --text-color: #bbb;
-
+  
   --footer-color: #1f1f1f;
   --footer-text-color: #b0b0b0;
   --footer-top: #2c2c2c;
-
-  --link-color: #808080
+  
+  --link-color: #808080;
+  
+  --startBtn-color: #2e7d32;
+  --stopBtn-color: #d32f2f;
+  --clcBtn-color: #4169E1;
 }
 
 * {
@@ -42,17 +50,18 @@ body {
   font-family: 'Noto Sans KR', sans-serif;
   color: var(--text-color);
   font-weight: 400;
+  font-size: 16px; /* 기본 폰트 크기 */
 }
 
 .inner {
-  width: 100%;
-  height: 100%;
+  width: 90vw; /* 동적 너비 */
+  height: auto; /* 자동 높이 */
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 2rem; /* 적당한 패딩 */
 }
 
 a {
-  all: unset
+  all: unset;
 }
 a:link, a:visited, a:active, a:hover {
   text-decoration: none;
@@ -67,7 +76,7 @@ section {
 
 header {
   width: 100%;
-  height: 60px;
+  height: 60px; /* 고정된 높이 */
   background-color: var(--head-color);
   position: fixed;
   top: 0;
@@ -76,35 +85,26 @@ header {
 }
 .head-container {
   width: 100%;
-  height: 100%;
+  height: 60px;
   background-color: var(--head-color);
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  line-height: 100%;
+  justify-content: space-between;
 }
 .head-container .head-brand {
   color: var(--text-color);
   font-weight: bold;
   font-size: 1rem;
 }
-.head-container .head-ps {
-  font-weight: bold;
-  font-size: 1.2rem;
-  font-family: 'Narnum Gothic', sans-serif;
-  color: var(--head-text-color);
-}
 .head-container .head-theme {
   font-size: 1.5rem;
-  color: var(--lightblub-color)
+  color: var(--lightblub-color);
 }
 
 .main {
   background-color: var(--background);
-  margin-top: 60px;
-  padding: 2rem;
-  z-index: 1;
-  align-content: center;
+  margin-top: 60px; /* 고정된 여백 */
+  padding: 2rem; /* 필요 시 조정 */
 }
 
 .main-container {
@@ -113,7 +113,7 @@ header {
 }
 
 .counter {
-  padding: 5% 20%;
+  padding: 5% 2rem; /* 적당한 패딩 */
   border: solid var(--head-color);
   background-color: var(--head-color);
   border-radius: 5%;
@@ -121,9 +121,6 @@ header {
   display: table-cell;
   text-align: center;
   vertical-align: middle;
-}
-.counter .desc {
-  font-family: 'Narnum Gothic', sans-serif;
 }
 .counter .desc a {
   font-weight: bold;
@@ -134,26 +131,45 @@ header {
 }
 .counter input {
   text-align: center;
+  margin: 0.1rem;
   height: 2rem;
   border-radius: 12px;
 }
-.counter .start {
-  background-color: #4CAF50;
+
+#status, .btn .cntClcButton {
+  display: none;
+}
+
+.btn {
+  margin: 0.4rem;
+}
+
+.btn button {
   border: none;
+  border-radius: 5px;
   color: white;
-  padding: 15px 32px;
+  padding: 10px 20px; /* 적당한 패딩 */
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 14px; /* 적당한 폰트 크기 */
   margin: 4px 2px;
   cursor: pointer;
 }
+
+.counter .start {
+  background-color: var(--startBtn-color);
+}
 .counter .stop {
-  background-color: #f44336;
+  background-color: var(--stopBtn-color);
 }
 
-footer{
+.counter .cntClcButton {
+  background-color: var(--clcBtn-color);
+  padding: 10px; /* 적당한 패딩 */
+}
+
+footer {
   width: 100%;
   position: fixed;
   bottom: 0;
@@ -161,16 +177,14 @@ footer{
   z-index: 1000;
   background-color: var(--footer-color);
   color: var(--footer-text-color);
-  padding: 1.3rem 0;
+  padding: 1rem 0; /* 적당한 패딩 */
   border-top: 1px solid var(--footer-top);
 }
-.copyright{
+.copyright {
   margin: 0.3rem 0;
 }
 
-
-
-.banselect{
+.banselect {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* 인터넷익스플로러 */
@@ -180,5 +194,15 @@ footer{
 @media screen and (min-width: 1000px) {
   .inner {
     max-width: 1000px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  body {
+    font-size: 14px; /* 작은 화면에서 폰트 크기 감소 */
+  }
+
+  .inner {
+    padding: 0 1rem; /* 여백 감소 */
   }
 }
