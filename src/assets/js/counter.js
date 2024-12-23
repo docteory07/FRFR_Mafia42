@@ -62,6 +62,8 @@ const toggleCounting = async () => {
       startCounting()
     } else {
       $name.readOnly = false
+      
+      cntClc(tmpCnt * -1)
       stopCounting()
       _cntBtn.textContent = '시작하기'
       _cntBtn.classList.remove('stop')
@@ -91,7 +93,6 @@ const startCounting = () => {
 }
 
 const stopCounting = () => {
-  cntClc(tmpCnt * -1)
   clearInterval(cntInterval)
 }
 
