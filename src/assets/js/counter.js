@@ -69,8 +69,6 @@ const toggleCounting = async () => {
       _status.style.display = 'none'
       _clcButtns[0].style.display = 'none'
       _clcButtns[1].style.display = 'none'
-      
-      tmpCnt = 0
     }
     isCounting = !isCounting
   }
@@ -93,6 +91,7 @@ const startCounting = () => {
 }
 
 const stopCounting = () => {
+  cntClc(-tmpCnt)
   clearInterval(cntInterval)
 }
 
