@@ -69,6 +69,8 @@ const toggleCounting = async () => {
       _status.style.display = 'none'
       _clcButtns[0].style.display = 'none'
       _clcButtns[1].style.display = 'none'
+      
+      tmpCnt = 0
     }
     isCounting = !isCounting
   }
@@ -92,7 +94,6 @@ const startCounting = () => {
 
 const stopCounting = () => {
   clearInterval(cntInterval)
-  tmpCnt = 0
 }
 
 const cntClc = (val) => {
@@ -107,7 +108,5 @@ const calcCount = (curTot, curWin, curLose) => {
 
   if (+cntTot == 31) {
     document.getElementById('cntComplete').textContent = "획초 끝!"
-  } else if (cntTot == 30) {
-    document.getElementById('cntComplete').textContent = "획초 막판!"
   }
 }
