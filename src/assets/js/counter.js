@@ -91,7 +91,7 @@ const startCounting = () => {
 }
 
 const stopCounting = () => {
-  console.log(tmpCnt);
+  cntClc(-tmpCnt)
   clearInterval(cntInterval)
 }
 
