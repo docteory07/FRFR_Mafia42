@@ -105,9 +105,9 @@ const calcCount = (curTot, curWin, curLose) => {
   document.getElementById('winCnt').textContent = curWin - preWin
   document.getElementById('loseCnt').textContent = curLose - preLose
 
-  if (+cntTot == 30) {
-    document.getElementById('cntComplete').textContent = "획초 막판!"
-  } else if (+cntTot == 31) {
+  if (+cntTot == 31) {
     document.getElementById('cntComplete').textContent = "획초 끝!"
+  } else if (cntTot == 30) {
+    document.getElementById('cntComplete').textContent = "획초 막판!"
   }
 }
